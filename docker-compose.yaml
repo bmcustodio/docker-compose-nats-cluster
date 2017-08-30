@@ -1,0 +1,58 @@
+networks: 
+  main: 
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 172.25.255.0/24
+      driver: default
+services: 
+  nats-1: 
+    command: 
+      - "-D"
+      - "-p"
+      - "4222"
+      - "-cluster"
+      - "nats://172.25.255.10:6222"
+    expose:
+      - "6222"
+    image: "nats:1.0.2"
+    networks: 
+      main: 
+        ipv4_address: "172.25.255.10"
+    ports:
+      - "14222:4222"
+  nats-2: 
+    command: 
+      - "-D"
+      - "-p"
+      - "4222"
+      - "-cluster"
+      - "nats://172.25.255.20:6222"
+      - "-routes"
+      - "nats://172.25.255.10:6222"
+    image: "nats:1.0.2"
+    expose:
+      - "6222"
+    networks: 
+      main: 
+        ipv4_address: "172.25.255.20"
+    ports:
+      - "24222:4222"
+  nats-3: 
+    command: 
+      - "-D"
+      - "-p"
+      - "4222"
+      - "-cluster"
+      - "nats://172.25.255.30:6222"
+      - "-routes"
+      - "nats://172.25.255.10:6222"
+    image: "nats:1.0.2"
+    expose:
+      - "6222"
+    networks: 
+      main: 
+        ipv4_address: "172.25.255.30"
+    ports:
+      - "34222:4222"
+version: "3"
