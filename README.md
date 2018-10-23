@@ -9,9 +9,12 @@ To start the cluster run
 ```
 $ docker-compose up
 (...)
-nats-1_1  | [1] 2017/08/04 14:21:12.490521 [INF] Starting nats-server version 1.0.2
-nats-3_1  | [1] 2017/08/04 14:21:12.544860 [INF] Starting nats-server version 1.0.2
-nats-2_1  | [1] 2017/08/04 14:21:12.584499 [INF] Starting nats-server version 1.0.2
+nats-3_1  | [1] 2018/10/23 18:22:50.522468 [INF] Starting nats-server version 1.0.2
+(...)
+nats-1_1  | [1] 2018/10/23 18:22:50.544219 [INF] Starting nats-server version 1.0.2
+(...)
+nats-2_1  | [1] 2018/10/23 18:22:50.738250 [INF] Starting nats-server version 1.0.2
+(...)
 ```
 
 ## Connecting
@@ -49,15 +52,19 @@ To stop the cluster hit `Ctrl+C` or run
 
 ```
 $ docker-compose down
-Stopping dockercomposenatscluster_nats-2_1 ... done
-Stopping dockercomposenatscluster_nats-1_1 ... done
-Stopping dockercomposenatscluster_nats-3_1 ... done
+Stopping docker-compose-nats-cluster_nats-2_1 ... done
+Stopping docker-compose-nats-cluster_nats-3_1 ... done
+Stopping docker-compose-nats-cluster_nats-1_1 ... done
+Removing docker-compose-nats-cluster_nats-2_1 ... done
+Removing docker-compose-nats-cluster_nats-3_1 ... done
+Removing docker-compose-nats-cluster_nats-1_1 ... done
+Removing network docker-compose-nats-cluster_main
 (...)
 ```
 
 ## License
 
-Copyright 2017 brunomcustodio
+Copyright 2017 bmcstdio
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
