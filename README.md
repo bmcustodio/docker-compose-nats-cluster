@@ -4,38 +4,49 @@ A three-node [NATS](https://nats.io/) cluster running on top of [Docker Compose]
 
 ## Starting
 
-To start the cluster run
+To start the NATS cluster run
 
 ```
 $ docker-compose up
 (...)
-nats-3_1  | [1] 2018/10/23 18:22:50.522468 [INF] Starting nats-server version 1.0.2
+nats-1_1  | [1] 2019/11/22 11:09:18.751792 [INF] Starting nats-server version 2.1.2
 (...)
-nats-1_1  | [1] 2018/10/23 18:22:50.544219 [INF] Starting nats-server version 1.0.2
+nats-2_1  | [1] 2019/11/22 11:09:18.637995 [INF] Starting nats-server version 2.1.2
 (...)
-nats-2_1  | [1] 2018/10/23 18:22:50.738250 [INF] Starting nats-server version 1.0.2
+nats-3_1  | [1] 2019/11/22 11:09:18.918417 [INF] Starting nats-server version 2.1.2
 (...)
 ```
 
 ## Connecting
 
-To connect to the cluster point your NATS client at one of `127.0.0.1:{14222,24222,34222}`:
+To connect to the NATS cluster point your NATS client at one of `127.0.0.1:{14222,24222,34222}`.
+
+### Example
+
+Install `nats-pub` and `nats-sub`:
+
+```shell
+$ go get github.com/nats-io/nats.go/examples/nats-pub
+$ go get github.com/nats-io/nats.go/examples/nats-sub
+```
+
+Point `nats-sub` at `nats://127.0.0.1:14222` and at the `foo` subject:
 
 ```
 $ nats-sub -s nats://127.0.0.1:14222 foo
 Listening on [foo]
 ```
 
-Now, on another shell run:
+Now, in another shell, point `nats-pub` at `nats://127.0.0.1:24222` and `nats://127.0.0.1:34222` and at the `foo` subject:
 
 ```
 $ nats-pub -s nats://127.0.0.1:24222 foo bar
 Published [foo] : 'bar'
-$ nats-pub -s nats://127.0.0.1:34222 foo bar
+$ nats-pub -s nats://127.0.0.1:34222 foo baz
 Published [foo] : 'baz'
 ```
 
-If everything's OK you should start seeing messages arriving in the first shell:
+By then you should start seeing messages arriving in the shell where `nats-sub` is running:
 
 ```
 $ nats-sub -s nats://127.0.0.1:14222 foo
@@ -44,27 +55,25 @@ Listening on [foo]
 [#2] Received on [foo] : 'baz'
 ```
 
-**NOTE:** In case you're wondering, `nats-pub` and `nats-sub` come from [`ruby-nats`](https://github.com/nats-io/ruby-nats).
-
 ## Stopping
 
-To stop the cluster hit `Ctrl+C` or run
+To stop the NATS cluster, hit `Ctrl+C`.
+
+## Destroying
+
+To destroy the NATS cluster, run
 
 ```
 $ docker-compose down
-Stopping docker-compose-nats-cluster_nats-2_1 ... done
-Stopping docker-compose-nats-cluster_nats-3_1 ... done
-Stopping docker-compose-nats-cluster_nats-1_1 ... done
-Removing docker-compose-nats-cluster_nats-2_1 ... done
-Removing docker-compose-nats-cluster_nats-3_1 ... done
 Removing docker-compose-nats-cluster_nats-1_1 ... done
+Removing docker-compose-nats-cluster_nats-3_1 ... done
+Removing docker-compose-nats-cluster_nats-2_1 ... done
 Removing network docker-compose-nats-cluster_main
-(...)
 ```
 
 ## License
 
-Copyright 2017 bmcstdio
+Copyright 2017-2019 bmcstdio
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
