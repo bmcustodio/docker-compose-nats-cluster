@@ -12,13 +12,8 @@ services:
       - "-p"
       - "4222"
       - "-cluster"
-      - "nats://172.25.255.10:6222"
-    expose:
-      - "6222"
+      - "nats://0.0.0.0:5222"
     image: "nats:2.1.2"
-    networks: 
-      main: 
-        ipv4_address: "172.25.255.10"
     ports:
       - "14222:4222"
   nats-2: 
@@ -27,15 +22,10 @@ services:
       - "-p"
       - "4222"
       - "-cluster"
-      - "nats://172.25.255.20:6222"
+      - "nats://0.0.0.0:5222"
       - "-routes"
-      - "nats://172.25.255.10:6222"
+      - "nats://nats-1:5222"
     image: "nats:2.1.2"
-    expose:
-      - "6222"
-    networks: 
-      main: 
-        ipv4_address: "172.25.255.20"
     ports:
       - "24222:4222"
   nats-3: 
@@ -44,15 +34,10 @@ services:
       - "-p"
       - "4222"
       - "-cluster"
-      - "nats://172.25.255.30:6222"
+      - "nats://0.0.0.0:5222"
       - "-routes"
-      - "nats://172.25.255.10:6222"
+      - "nats://nats-1:5222"
     image: "nats:2.1.2"
-    expose:
-      - "6222"
-    networks: 
-      main: 
-        ipv4_address: "172.25.255.30"
     ports:
       - "34222:4222"
 version: "3.7"
