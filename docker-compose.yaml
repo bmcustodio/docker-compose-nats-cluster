@@ -13,7 +13,9 @@ services:
       - "4222"
       - "-cluster"
       - "nats://0.0.0.0:5222"
-    image: "nats:2.1.2"
+    image: "nats:2.1.4"
+    networks:
+      - main
     ports:
       - "14222:4222"
   nats-2: 
@@ -25,7 +27,9 @@ services:
       - "nats://0.0.0.0:5222"
       - "-routes"
       - "nats://nats-1:5222"
-    image: "nats:2.1.2"
+    image: "nats:2.1.4"
+    networks:
+      - main
     ports:
       - "24222:4222"
   nats-3: 
@@ -37,7 +41,9 @@ services:
       - "nats://0.0.0.0:5222"
       - "-routes"
       - "nats://nats-1:5222"
-    image: "nats:2.1.2"
+    image: "nats:2.1.4"
+    networks:
+      - main
     ports:
       - "34222:4222"
 version: "3.7"
