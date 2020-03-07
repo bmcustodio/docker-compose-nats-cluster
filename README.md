@@ -1,25 +1,27 @@
 # docker-compose-nats-cluster
 
-A three-node [NATS](https://nats.io/) cluster running on top of [Docker Compose](https://docs.docker.com/compose/) for testing purposes.
+A three-node [NATS](https://nats.io/) cluster running on top of [Docker Compose](https://docs.docker.com/compose/), for testing purposes.
+
+![License](https://img.shields.io/github/license/bmcstdio/docker-compose-nats-cluster)
 
 ## Starting
 
-To start the NATS cluster run
+To start the NATS cluster, run
 
 ```
 $ docker-compose up
 (...)
-nats-1_1  | [1] 2019/11/22 11:09:18.751792 [INF] Starting nats-server version 2.1.2
+nats-2_1  | [1] 2020/03/07 13:40:29.890917 [INF] Starting nats-server version 2.1.4
 (...)
-nats-2_1  | [1] 2019/11/22 11:09:18.637995 [INF] Starting nats-server version 2.1.2
+nats-1_1  | [1] 2020/03/07 13:40:29.841022 [INF] Starting nats-server version 2.1.4
 (...)
-nats-3_1  | [1] 2019/11/22 11:09:18.918417 [INF] Starting nats-server version 2.1.2
+nats-3_1  | [1] 2020/03/07 13:40:29.895016 [INF] Starting nats-server version 2.1.4
 (...)
 ```
 
 ## Connecting
 
-To connect to the NATS cluster point your NATS client at one of `127.0.0.1:{14222,24222,34222}`.
+To connect to the NATS cluster, point your NATS client at one of `127.0.0.1:{14222,24222,34222}`.
 
 ### Example
 
@@ -46,7 +48,7 @@ $ nats-pub -s nats://127.0.0.1:34222 foo baz
 Published [foo] : 'baz'
 ```
 
-By then you should start seeing messages arriving in the shell where `nats-sub` is running:
+By then, you should start seeing messages arriving in the shell where `nats-sub` is running:
 
 ```
 $ nats-sub -s nats://127.0.0.1:14222 foo
@@ -73,7 +75,7 @@ Removing network docker-compose-nats-cluster_main
 
 ## License
 
-Copyright 2017-2019 bmcstdio
+Copyright 2017-2020 bmcstdio
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
