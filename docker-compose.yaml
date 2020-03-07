@@ -8,42 +8,51 @@ networks:
 services: 
   nats-1: 
     command: 
-      - "-D"
-      - "-p"
+      - "--debug"
+      - "--cluster"
+      - "nats://0.0.0.0:6222"
+      - "--http_port"
+      - "8222"
+      - "--port"
       - "4222"
-      - "-cluster"
-      - "nats://0.0.0.0:5222"
     image: "nats:2.1.4"
     networks:
       - main
     ports:
       - "14222:4222"
+      - "18222:8222"
   nats-2: 
     command: 
-      - "-D"
-      - "-p"
+      - "--debug"
+      - "--cluster"
+      - "nats://0.0.0.0:6222"
+      - "--http_port"
+      - "8222"
+      - "--port"
       - "4222"
-      - "-cluster"
-      - "nats://0.0.0.0:5222"
-      - "-routes"
-      - "nats://nats-1:5222"
+      - "--routes"
+      - "nats://nats-1:6222"
     image: "nats:2.1.4"
     networks:
       - main
     ports:
       - "24222:4222"
+      - "28222:8222"
   nats-3: 
-    command: 
-      - "-D"
-      - "-p"
+    command:
+      - "--debug"
+      - "--cluster"
+      - "nats://0.0.0.0:6222"
+      - "--http_port"
+      - "8222"
+      - "--port"
       - "4222"
-      - "-cluster"
-      - "nats://0.0.0.0:5222"
-      - "-routes"
-      - "nats://nats-1:5222"
+      - "--routes"
+      - "nats://nats-1:6222"
     image: "nats:2.1.4"
     networks:
       - main
     ports:
       - "34222:4222"
+      - "38222:8222"
 version: "3.7"
