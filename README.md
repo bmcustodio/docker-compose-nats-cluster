@@ -2,7 +2,7 @@
 
 A three-node [NATS](https://nats.io/) cluster running on top of [Docker Compose](https://docs.docker.com/compose/), for testing purposes.
 
-![License](https://img.shields.io/github/license/bmcstdio/docker-compose-nats-cluster)
+![License](https://img.shields.io/github/license/bmcustodio/docker-compose-nats-cluster)
 
 ## Starting
 
@@ -75,7 +75,7 @@ Removing network docker-compose-nats-cluster_main
 
 ## License
 
-Copyright 2017-2020 bmcstdio
+Copyright 2017-2020 bmcustodio
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
